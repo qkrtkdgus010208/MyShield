@@ -20,4 +20,9 @@ public class Square : MonoBehaviour
             GameManager.Instance.GameOver();
         }
     }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }
