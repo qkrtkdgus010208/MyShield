@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text timeText;
     [SerializeField] GameObject endPanel;
     [SerializeField] Text nowScore;
+    [SerializeField] Text bestScore;
 
     private float time;
     private bool isPlay;
+    private string key = "bestScore";
 
     private void Awake()
     {
@@ -46,6 +48,35 @@ public class GameManager : MonoBehaviour
         isPlay = false;
         Time.timeScale = 0.0f;
         nowScore.text = time.ToString("F2");
+
+        UpdateBestScore();
+
         endPanel.SetActive(true);
+    }
+
+    private void UpdateBestScore()
+    {
+        // 최고 점수가 있다면
+        if (PlayerPrefs.HasKey(key))
+        {
+            float best = PlayerPrefs.GetFloat(key);
+
+            // 최고 점수 < 현재 점수
+            if (best < time)
+            {
+                // 현재 점수를 최고 점수에 저장
+                PlayerPrefs.SetFloat(key, time);
+                bestScore.text = time.ToString("F2");
+            }
+            else
+            {
+                bestScore.text = best.ToString("F2");
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(key, time);
+            bestScore.text = time.ToString("F2");
+        }
     }
 }
