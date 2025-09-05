@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject endPanel;
     [SerializeField] Text nowScore;
     [SerializeField] Text bestScore;
+    [SerializeField] Animator anim;
 
     private float time;
     private bool isPlay;
@@ -46,7 +47,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isPlay = false;
-        Time.timeScale = 0.0f;
+        anim.SetBool("isDie", true);
+        Invoke("TimeStop", 0.5f);
         nowScore.text = time.ToString("F2");
 
         UpdateBestScore();
@@ -78,5 +80,10 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat(key, time);
             bestScore.text = time.ToString("F2");
         }
+    }
+
+    private void TimeStop()
+    {
+        Time.timeScale = 0.0f;
     }
 }

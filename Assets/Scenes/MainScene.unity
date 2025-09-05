@@ -232,6 +232,7 @@ MonoBehaviour:
   endPanel: {fileID: 764875771}
   nowScore: {fileID: 1243676721}
   bestScore: {fileID: 308919390}
+  anim: {fileID: 639964315}
 --- !u!4 &206332814
 Transform:
   m_ObjectHideFlags: 0
